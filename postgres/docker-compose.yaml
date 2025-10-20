@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:16.2
+    networks:
+      - infra
+    environment:
+      POSTGRES_DB: default
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+networks:
+  infra:
+    external: true
+    name: local-infra
+
+volumes:
+  postgres_data:

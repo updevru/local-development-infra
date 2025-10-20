@@ -22,16 +22,3 @@ datasources:
     access: proxy
     url: http://tempo:3200
     editable: false
-
-  - name: PostgreSQL
-    type: postgres
-    access: proxy
-    url: postgres:5432
-    database: default
-    user: ${POSTGRES_USER}
-    editable: false
-    secureJsonData:
-      password: ${POSTGRES_PASSWORD}
-    jsonData:
-      sslmode: disable
-      postgresVersion: 1600

@@ -1,33 +1,20 @@
 version: '3.7'
 
 services:
-  postgres:
-    image: postgres:16.2
-    networks:
-      - infra
-    environment:
-      POSTGRES_DB: default
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
   tempo:
     image: grafana/tempo:latest
     networks:
       - infra
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
-      - ./deployments/tempo/tempo.yaml:/etc/tempo.yaml
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib
     networks:
       - infra
     volumes:
-      - ./deployments/otelcol/config.yaml:/etc/otelcol-contrib/config.yaml
+      - ./otelcol/config.yaml:/etc/otelcol-contrib/config.yaml
     ports:
       - "4317:4317" # OTLP gRPC receiver
       - "4318:4318" # OTLP http receiver
@@ -37,7 +24,7 @@ services:
     networks:
       - infra
     volumes:
-      - ./deployments/mimir/mimir.yaml:/etc/mimir/mimir.yaml
+      - ./mimir/mimir.yaml:/etc/mimir/mimir.yaml
     command: "--config.file=/etc/mimir/mimir.yaml"
 
   grafana:
@@ -48,14 +35,14 @@ services:
       - "3000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./deployments/grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
 
   loki:
     image: grafana/loki:3.2.0
     networks:
       - infra
     volumes:
-      - ./deployments/loki/config.yaml:/mnt/config/loki.yml
+      - ./loki/config.yaml:/mnt/config/loki.yml
     command: --config.file=/mnt/config/loki.yml
 
 networks:
@@ -64,5 +51,4 @@ networks:
     name: local-infra
 
 volumes:
-  postgres_data:
   grafana_data:
