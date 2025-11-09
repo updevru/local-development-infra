@@ -4,10 +4,10 @@
 
 ## Сервисы
 
-| Сервис                  | Описание                                                                     | Test                                        |
-|-------------------------|------------------------------------------------------------------------------|---------------------------------------------|
-| [OpenTelemetry](otel)   | Набор сервисов для сбора телеметрии (Grafana, Loki, Tempo, Mimir, Collector) | http://localhost:4317 http://localhost:4318 |
-| [PostgresSQL](postgres) | База данных для приложений                                                   | localhost:5432                              |
+| Сервис                  | Описание                                                                     |
+|-------------------------|------------------------------------------------------------------------------|
+| [OpenTelemetry](otel)   | Набор сервисов для сбора телеметрии (Grafana, Loki, Tempo, Mimir, Collector) |
+| [PostgresSQL](postgres) | База данных для приложений                                                   |
 
 
 ## Запуск
@@ -28,5 +28,5 @@ docker compose up -d
 
 | MCP сервер                                                      | Описание                                |
 |-----------------------------------------------------------------|-----------------------------------------|
-| (tempo-mcp-server)[https://github.com/grafana/tempo-mcp-server] | Для анализа трейсов и поиска узких мест |
-| (mcp-grafana)[https://github.com/grafana/mcp-grafana]           | Интеграция с Grafana                    |
+| [tempo-mcp-server](https://github.com/grafana/tempo-mcp-server) | Для анализа трейсов и поиска узких мест |
+| [mcp-grafana](https://github.com/grafana/mcp-grafana)           | Интеграция с Grafana                    |
